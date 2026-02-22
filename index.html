@@ -157,12 +157,22 @@
       overflow: hidden;
     }
 
+    /* ─── HERO WAVY CANVAS ─── */
+    #hero-waves {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
     .hero::before {
       content: '';
       position: absolute; inset: 0;
       background-image: radial-gradient(circle, rgba(27,196,125,0.04) 1px, transparent 1px);
       background-size: 48px 48px;
       pointer-events: none;
+      z-index: 1;
     }
 
     .hero-glow-1 {
@@ -172,6 +182,7 @@
       background: radial-gradient(circle, rgba(27,196,125,0.09) 0%, transparent 65%);
       right: -180px; top: -100px;
       pointer-events: none;
+      z-index: 1;
     }
     .hero-glow-2 {
       position: absolute;
@@ -180,20 +191,22 @@
       background: radial-gradient(circle, rgba(27,196,125,0.05) 0%, transparent 65%);
       left: -80px; bottom: 80px;
       pointer-events: none;
+      z-index: 1;
     }
 
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       flex: 1;
       padding: 5rem 2rem 3rem;
       max-width: 1160px;
       margin: 0 auto;
       width: 100%;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero-badge {
@@ -239,121 +252,7 @@
       max-width: 460px;
     }
 
-    .hero-cta { display: flex; gap: 0.875rem; flex-wrap: wrap; }
-
-    /* ─── ORB ─── */
-    .orb-scene {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      height: 440px;
-    }
-
-    .orb-rings {
-      position: relative;
-      width: 380px; height: 380px;
-    }
-
-    .orb-sphere {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 220px; height: 220px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #1f6b47 0%, #0d3d28 30%, #081f16 55%, #0F172A 100%);
-      box-shadow:
-        0 0 80px rgba(27,196,125,0.38),
-        0 0 140px rgba(27,196,125,0.12),
-        inset 0 0 60px rgba(27,196,125,0.1);
-      z-index: 2;
-      animation: orb-pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes orb-pulse {
-      0%,100% { box-shadow: 0 0 80px rgba(27,196,125,0.38), 0 0 140px rgba(27,196,125,0.12), inset 0 0 60px rgba(27,196,125,0.1); }
-      50%      { box-shadow: 0 0 100px rgba(27,196,125,0.55), 0 0 180px rgba(27,196,125,0.18), inset 0 0 80px rgba(27,196,125,0.16); }
-    }
-
-    .orb-sphere::after {
-      content: '';
-      position: absolute;
-      top: 15%; left: 18%;
-      width: 55%; height: 45%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(27,196,125,0.3), transparent 70%);
-    }
-
-    .ring {
-      position: absolute;
-      top: 50%; left: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(27,196,125,0.18);
-    }
-    .ring-1 {
-      width: 420px; height: 420px;
-      margin-left: -210px; margin-top: -210px;
-      transform: rotateX(72deg) rotateZ(18deg);
-      animation: ring-glow1 5s ease-in-out infinite;
-    }
-    .ring-2 {
-      width: 480px; height: 480px;
-      margin-left: -240px; margin-top: -240px;
-      transform: rotateX(68deg) rotateZ(-38deg);
-      border-color: rgba(27,196,125,0.1);
-      animation: ring-glow2 7s ease-in-out infinite;
-    }
-    .ring-3 {
-      width: 350px; height: 350px;
-      margin-left: -175px; margin-top: -175px;
-      transform: rotateX(60deg) rotateZ(75deg);
-      border-color: rgba(27,196,125,0.08);
-      animation: ring-glow3 6s ease-in-out infinite;
-    }
-
-    @keyframes ring-glow1 {
-      0%,100% { border-color: rgba(27,196,125,0.16); }
-      50%      { border-color: rgba(27,196,125,0.36); }
-    }
-    @keyframes ring-glow2 {
-      0%,100% { border-color: rgba(27,196,125,0.1); }
-      50%      { border-color: rgba(27,196,125,0.25); }
-    }
-    @keyframes ring-glow3 {
-      0%,100% { border-color: rgba(27,196,125,0.07); }
-      50%      { border-color: rgba(27,196,125,0.2); }
-    }
-
-    .orb-dot {
-      position: absolute;
-      border-radius: 50%;
-      z-index: 3;
-    }
-    .orb-dot-1 {
-      width: 10px; height: 10px;
-      top: 22%; left: 65%;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(27,196,125,0.9);
-      animation: dot-float1 4s ease-in-out infinite;
-    }
-    .orb-dot-2 {
-      width: 8px; height: 8px;
-      top: 60%; left: 25%;
-      background: var(--green-light);
-      box-shadow: 0 0 10px rgba(27,196,125,0.8);
-      animation: dot-float2 5.5s ease-in-out infinite;
-    }
-    .orb-dot-3 {
-      width: 6px; height: 6px;
-      top: 75%; left: 68%;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(27,196,125,0.7);
-      animation: dot-float3 6s ease-in-out infinite;
-    }
-
-    @keyframes dot-float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    @keyframes dot-float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(6px,-5px); } }
-    @keyframes dot-float3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+    .hero-cta { display: flex; gap: 0.875rem; flex-wrap: wrap; justify-content: center; }
 
     /* ─── PLATFORM STRIP ─── */
     .platform-strip {
@@ -386,49 +285,6 @@
       width: 5px; height: 5px; border-radius: 50%;
       background: var(--green); flex-shrink: 0;
     }
-
-    /* ─── CUSTOMERS ─── */
-    .logos-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 3.5rem; flex-wrap: wrap; margin: 2.5rem 0;
-    }
-    .logo-badge {
-      font-family: 'Urbanist', sans-serif;
-      font-weight: 700; font-size: 1.0625rem;
-      letter-spacing: -0.01em;
-      color: rgba(248,250,252,0.3);
-      transition: color 0.2s;
-    }
-    .logo-badge:hover { color: rgba(248,250,252,0.65); }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1.25rem; margin-top: 2.5rem;
-    }
-    .testi-card {
-      background: var(--bg-3);
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.625rem;
-      transition: border-color 0.2s;
-    }
-    .testi-card:hover { border-color: var(--border-green); }
-    .stars { color: var(--green); font-size: 0.875rem; margin-bottom: 0.875rem; letter-spacing: 2px; }
-    .testi-text { font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.25rem; color: var(--text); }
-    .testi-author { display: flex; align-items: center; gap: 0.75rem; }
-    .avatar {
-      width: 38px; height: 38px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Urbanist', sans-serif;
-      font-size: 0.8125rem; font-weight: 700; color: #0F172A;
-      background: linear-gradient(135deg, var(--green-dark), var(--green));
-      flex-shrink: 0;
-    }
-    .author-name {
-      font-family: 'Urbanist', sans-serif;
-      font-size: 0.875rem; font-weight: 600; color: var(--text-bright);
-    }
-    .author-role { font-size: 0.75rem; color: var(--text-dim); }
 
     /* ─── FEATURE 2-COL ─── */
     .feat-2col {
@@ -595,41 +451,6 @@
     }
     .diff-text { font-size: 0.875rem; color: var(--text); line-height: 1.7; }
 
-    /* ─── RESOURCES ─── */
-    .res-header {
-      display: flex; align-items: flex-end;
-      justify-content: space-between; margin-bottom: 2.5rem;
-    }
-    .res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
-    .res-card {
-      background: var(--bg-2); border: 1px solid var(--border);
-      border-radius: 14px; overflow: hidden; transition: border-color 0.2s;
-    }
-    .res-card:hover { border-color: var(--border-green); }
-    .res-img {
-      aspect-ratio: 16/9; background: var(--bg-3);
-      position: relative; display: flex; align-items: center;
-      justify-content: center; font-size: 3.5rem;
-      color: rgba(255,255,255,0.07);
-    }
-    .res-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(27,196,125,0.1), rgba(15,23,42,0.05));
-    }
-    .res-tag-badge {
-      position: absolute; top: 0.875rem; left: 0.875rem;
-      background: rgba(27,196,125,0.18); border: 1px solid var(--border-green);
-      border-radius: 4px; padding: 0.2rem 0.5rem;
-      font-family: 'Poppins', sans-serif; font-size: 0.5625rem; font-weight: 500;
-      color: var(--green-light); letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .res-body { padding: 1.375rem; }
-    .res-title {
-      font-family: 'Urbanist', sans-serif; font-size: 0.9375rem; font-weight: 600;
-      color: var(--text-bright); margin-bottom: 0.5rem; line-height: 1.45;
-    }
-    .res-desc { font-size: 0.8125rem; color: var(--text); line-height: 1.65; }
-
     /* ─── FAQ ─── */
     .faq-wrap { max-width: 760px; margin: 3rem auto 0; }
     .faq-item { border-top: 1px solid var(--border); }
@@ -766,41 +587,25 @@
     <li><a href="#">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#" class="btn btn-ghost">Log in</a>
     <a href="#" class="btn btn-primary">Get a Free Quote</a>
   </div>
 </nav>
 
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section class="hero">
+  <canvas id="hero-waves"></canvas>
   <div class="hero-glow-1"></div>
   <div class="hero-glow-2"></div>
 
   <div class="hero-inner">
     <div>
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        <span class="hero-badge-text">Web Design for Local Contractors</span>
-      </div>
       <h1>Websites that<br>win you <em>more clients</em></h1>
       <p class="hero-sub">BA Labs builds fast, professional websites for local contractors. Get found online, stand out from the competition, and turn visitors into paying customers.</p>
       <div class="hero-cta">
         <a href="#" class="btn btn-primary btn-lg">Get a Free Quote &rarr;</a>
-        <a href="#" class="btn btn-ghost btn-lg">See our work</a>
       </div>
     </div>
 
-    <div class="orb-scene">
-      <div class="orb-rings">
-        <div class="ring ring-1"></div>
-        <div class="ring ring-2"></div>
-        <div class="ring ring-3"></div>
-        <div class="orb-sphere"></div>
-        <div class="orb-dot orb-dot-1"></div>
-        <div class="orb-dot orb-dot-2"></div>
-        <div class="orb-dot orb-dot-3"></div>
-      </div>
-    </div>
   </div>
 
   <div class="platform-strip">
@@ -812,62 +617,6 @@
         <span class="pill">SEO optimized</span>
         <span class="pill">Fast delivery</span>
         <span class="pill">Ongoing support</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════ CUSTOMERS ══════════════════════════ -->
-<section class="section bg-alt">
-  <div class="container">
-    <div style="text-align:center;" class="sr">
-      <span class="section-tag">Social proof</span>
-      <h2 class="section-title">Don't just take our word for it,<br>our <em>clients</em> say it best</h2>
-    </div>
-
-    <div class="logos-row sr">
-      <span class="logo-badge">Hansen Rør</span>
-      <span class="logo-badge">Nordvik El</span>
-      <span class="logo-badge">Oslo Fence Co</span>
-      <span class="logo-badge">Bergen Bygg</span>
-      <span class="logo-badge">TakTekk AS</span>
-      <span class="logo-badge">Grønt Anlegg</span>
-      <span class="logo-badge">Stavanger VVS</span>
-    </div>
-
-    <div class="testi-grid">
-      <div class="testi-card sr">
-        <div class="stars">★★★★★</div>
-        <p class="testi-text">"BA Labs built us a website in under two weeks. Since launch our phone hasn't stopped ringing. More leads in one month than we got all of last year. Dead simple to work with."</p>
-        <div class="testi-author">
-          <div class="avatar">TH</div>
-          <div>
-            <div class="author-name">Tor Hansen</div>
-            <div class="author-role">Owner, Hansen Rør AS — Oslo</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card sr" style="transition-delay:.12s">
-        <div class="stars">★★★★★</div>
-        <p class="testi-text">"We tried two other agencies before BA Labs. Nobody else understood what we actually needed. Now we rank on Google locally and customers find us every day without us doing anything."</p>
-        <div class="testi-author">
-          <div class="avatar">MB</div>
-          <div>
-            <div class="author-name">Marte Berg</div>
-            <div class="author-role">Director, Nordvik El — Bergen</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card sr" style="transition-delay:.24s">
-        <div class="stars">★★★★★</div>
-        <p class="testi-text">"Professional, fast, and they speak plain language — no tech jargon. Our new site looks amazing on phones, and we get quote requests directly through the contact form every week."</p>
-        <div class="testi-author">
-          <div class="avatar">KL</div>
-          <div>
-            <div class="author-name">Kristian Larsen</div>
-            <div class="author-role">CEO, Oslo Fence Co — Oslo</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1003,18 +752,6 @@
       <div class="int-item"><div class="int-icon">🔧</div><span class="int-name">Plumbing</span></div>
       <div class="int-item"><div class="int-icon">⚡</div><span class="int-name">Electrical</span></div>
       <div class="int-item"><div class="int-icon">🏗️</div><span class="int-name">Fencing</span></div>
-      <div class="int-item"><div class="int-icon">🏠</div><span class="int-name">Roofing</span></div>
-      <div class="int-item"><div class="int-icon">🌱</div><span class="int-name">Landscaping</span></div>
-      <div class="int-item"><div class="int-icon">❄️</div><span class="int-name">HVAC</span></div>
-      <div class="int-item"><div class="int-icon">🪚</div><span class="int-name">Carpentry</span></div>
-      <div class="int-item"><div class="int-icon">🎨</div><span class="int-name">Painting</span></div>
-      <div class="int-item"><div class="int-icon">🧹</div><span class="int-name">Cleaning</span></div>
-      <div class="int-item"><div class="int-icon">🏛️</div><span class="int-name">Tiling</span></div>
-      <div class="int-item"><div class="int-icon">🪵</div><span class="int-name">Flooring</span></div>
-      <div class="int-item int-more">
-        <div class="int-count">+More</div>
-        <span class="int-name">Your trade</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1057,54 +794,6 @@
         <div class="diff-icon">💬</div>
         <div class="diff-title">Real people, real support</div>
         <div class="diff-text">You'll always speak to a real person at BA Labs — not a chatbot. We're here when you need us, with plain language and no technical jargon.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════ RESOURCES ══════════════════════════ -->
-<section class="section">
-  <div class="container">
-    <div class="res-header sr">
-      <div>
-        <span class="section-tag">Resources</span>
-        <h2 class="section-title">Helpful guides for<br>growing your <em>business online</em></h2>
-      </div>
-      <a href="#" class="btn btn-ghost">Read all articles &rarr;</a>
-    </div>
-    <div class="res-grid">
-      <div class="res-card sr">
-        <div class="res-img">
-          📋
-          <div class="res-img-overlay"></div>
-          <span class="res-tag-badge">Guide</span>
-        </div>
-        <div class="res-body">
-          <div class="res-title">5 things every contractor website must have in 2025</div>
-          <div class="res-desc">A quick checklist of the most important elements that separate websites that generate leads from those that don't — straight to the point.</div>
-        </div>
-      </div>
-      <div class="res-card sr" style="transition-delay:.12s">
-        <div class="res-img">
-          📈
-          <div class="res-img-overlay" style="background:linear-gradient(135deg,rgba(27,196,125,0.12),rgba(15,23,42,0.05));"></div>
-          <span class="res-tag-badge">Case Study</span>
-        </div>
-        <div class="res-body">
-          <div class="res-title">How Hansen Rør doubled their leads in 60 days</div>
-          <div class="res-desc">A small Oslo plumbing company went from no online presence to their busiest season ever — here's exactly what we did and how long it took.</div>
-        </div>
-      </div>
-      <div class="res-card sr" style="transition-delay:.24s">
-        <div class="res-img">
-          🗺️
-          <div class="res-img-overlay" style="background:linear-gradient(135deg,rgba(27,196,125,0.1),rgba(15,23,42,0.08));"></div>
-          <span class="res-tag-badge">Tips</span>
-        </div>
-        <div class="res-body">
-          <div class="res-title">How to get your business on Google Maps (step by step)</div>
-          <div class="res-desc">Google Business Profile is free and one of the most powerful tools for local contractors. Here's how to set it up properly in under 30 minutes.</div>
-        </div>
       </div>
     </div>
   </div>
@@ -1259,6 +948,79 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+</script>
+
+<script type="module">
+  /* ─── WAVY BACKGROUND — hero section ─── */
+  import { createNoise3D } from 'https://cdn.jsdelivr.net/npm/simplex-noise@4.0.3/+esm';
+
+  const canvas = document.getElementById('hero-waves');
+  const ctx    = canvas.getContext('2d');
+  const noise3D = createNoise3D();
+
+  // Brand-green wave palette
+  const waveColors = [
+    'rgba(27,196,125,0.85)',
+    'rgba(82,217,154,0.65)',
+    'rgba(21,160,103,0.75)',
+    'rgba(27,196,125,0.50)',
+    'rgba(56,220,142,0.70)',
+  ];
+
+  const BLUR         = 20;   // softer glow
+  const WAVE_WIDTH   = 22;   // thinner lines
+  const WAVE_OPACITY = 0.46;
+  const BG_FILL      = '#0F172A';  // Anchor Navy — matches --bg
+  const SPEED        = 0.0015;
+
+  let w, h, nt = 0, animId;
+
+  // Safari: ctx.filter may not work — fall back to CSS filter
+  const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+  function resize() {
+    const hero = document.querySelector('.hero');
+    // Scale canvas to devicePixelRatio for crisp rendering on hi-DPI screens
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = hero.offsetWidth;
+    h = hero.offsetHeight;
+    canvas.width        = w * dpr;
+    canvas.height       = h * dpr;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // reset + apply dpr scale
+    if (!isSafari) ctx.filter = `blur(${BLUR}px)`;
+  }
+
+  function drawWaves(n) {
+    nt += SPEED;
+    for (let i = 0; i < n; i++) {
+      ctx.beginPath();
+      ctx.lineWidth   = WAVE_WIDTH;
+      ctx.strokeStyle = waveColors[i % waveColors.length];
+      for (let x = 0; x < w; x += 2) {   // step 2 = smoother curves
+        const y = noise3D(x / 800, 0.3 * i, nt) * 100;
+        ctx.lineTo(x, y + h * 0.5);
+      }
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }
+
+  function render() {
+    ctx.fillStyle  = BG_FILL;
+    ctx.globalAlpha = WAVE_OPACITY;
+    ctx.fillRect(0, 0, w, h);
+    drawWaves(5);
+    animId = requestAnimationFrame(render);
+  }
+
+  // Safari CSS-filter fallback
+  if (isSafari) canvas.style.filter = `blur(${BLUR}px)`;
+
+  resize();
+  window.addEventListener('resize', resize);
+  render();
 </script>
 
 </body>
