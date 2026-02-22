@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BA Labs — Websites for Local Contractors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:           #0F172A;   /* Anchor Navy */
+      --bg-2:         #162032;   /* Alt section bg */
+      --bg-3:         #1C2B42;   /* Card surface */
+      --bg-4:         #243352;   /* Elevated card */
+      --green:        #1BC47D;   /* Brand Green */
+      --green-light:  #52d99a;   /* Lighter green */
+      --green-dark:   #15a067;   /* Darker green */
+      --text:         #94a3b8;   /* Body text */
+      --text-bright:  #F8FAFC;   /* Headings / Light */
+      --text-dim:     #64748B;   /* Text Gray */
+      --soft-gray:    #E2E8F0;   /* Soft Gray */
+      --border:       rgba(255,255,255,0.07);
+      --border-green: rgba(27,196,125,0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; text-wrap: pretty; }
+
+    html { font-size: 1rem; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', Verdana, sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4 {
+      font-family: 'Urbanist', Arial, sans-serif;
+      color: var(--text-bright);
+      line-height: 1.15;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── UTILITIES ─── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 6rem 0; }
+    .bg-alt { background: var(--bg-2); }
+
+    .section-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.875rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.625rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title em { font-style: normal; color: var(--green); }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.75;
+      max-width: 520px;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 7px;
+      padding: 0.5625rem 1.25rem;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.15s;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--green);
+      color: #0F172A;
+      font-weight: 600;
+      border-color: var(--green);
+    }
+    .btn-primary:hover { background: var(--green-light); border-color: var(--green-light); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover { color: var(--text-bright); border-color: rgba(255,255,255,0.18); }
+
+    .btn-lg { padding: 0.875rem 2rem; font-size: 1rem; border-radius: 9px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15,23,42,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img { height: 36px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--text-bright); }
+
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(27,196,125,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-glow-1 {
+      position: absolute;
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,196,125,0.09) 0%, transparent 65%);
+      right: -180px; top: -100px;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,196,125,0.05) 0%, transparent 65%);
+      left: -80px; bottom: 80px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      flex: 1;
+      padding: 5rem 2rem 3rem;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(27,196,125,0.1);
+      border: 1px solid var(--border-green);
+      border-radius: 100px;
+      padding: 0.3rem 0.875rem;
+      margin-bottom: 1.75rem;
+      width: fit-content;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(27,196,125,0.8);
+      flex-shrink: 0;
+    }
+    .hero-badge-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--green-light);
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--green); }
+
+    .hero-sub {
+      font-size: 1.0625rem;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 2.25rem;
+      max-width: 460px;
+    }
+
+    .hero-cta { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+
+    /* ─── ORB ─── */
+    .orb-scene {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 440px;
+    }
+
+    .orb-rings {
+      position: relative;
+      width: 380px; height: 380px;
+    }
+
+    .orb-sphere {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 220px; height: 220px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #1f6b47 0%, #0d3d28 30%, #081f16 55%, #0F172A 100%);
+      box-shadow:
+        0 0 80px rgba(27,196,125,0.38),
+        0 0 140px rgba(27,196,125,0.12),
+        inset 0 0 60px rgba(27,196,125,0.1);
+      z-index: 2;
+      animation: orb-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes orb-pulse {
+      0%,100% { box-shadow: 0 0 80px rgba(27,196,125,0.38), 0 0 140px rgba(27,196,125,0.12), inset 0 0 60px rgba(27,196,125,0.1); }
+      50%      { box-shadow: 0 0 100px rgba(27,196,125,0.55), 0 0 180px rgba(27,196,125,0.18), inset 0 0 80px rgba(27,196,125,0.16); }
+    }
+
+    .orb-sphere::after {
+      content: '';
+      position: absolute;
+      top: 15%; left: 18%;
+      width: 55%; height: 45%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,196,125,0.3), transparent 70%);
+    }
+
+    .ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(27,196,125,0.18);
+    }
+    .ring-1 {
+      width: 420px; height: 420px;
+      margin-left: -210px; margin-top: -210px;
+      transform: rotateX(72deg) rotateZ(18deg);
+      animation: ring-glow1 5s ease-in-out infinite;
+    }
+    .ring-2 {
+      width: 480px; height: 480px;
+      margin-left: -240px; margin-top: -240px;
+      transform: rotateX(68deg) rotateZ(-38deg);
+      border-color: rgba(27,196,125,0.1);
+      animation: ring-glow2 7s ease-in-out infinite;
+    }
+    .ring-3 {
+      width: 350px; height: 350px;
+      margin-left: -175px; margin-top: -175px;
+      transform: rotateX(60deg) rotateZ(75deg);
+      border-color: rgba(27,196,125,0.08);
+      animation: ring-glow3 6s ease-in-out infinite;
+    }
+
+    @keyframes ring-glow1 {
+      0%,100% { border-color: rgba(27,196,125,0.16); }
+      50%      { border-color: rgba(27,196,125,0.36); }
+    }
+    @keyframes ring-glow2 {
+      0%,100% { border-color: rgba(27,196,125,0.1); }
+      50%      { border-color: rgba(27,196,125,0.25); }
+    }
+    @keyframes ring-glow3 {
+      0%,100% { border-color: rgba(27,196,125,0.07); }
+      50%      { border-color: rgba(27,196,125,0.2); }
+    }
+
+    .orb-dot {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 3;
+    }
+    .orb-dot-1 {
+      width: 10px; height: 10px;
+      top: 22%; left: 65%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(27,196,125,0.9);
+      animation: dot-float1 4s ease-in-out infinite;
+    }
+    .orb-dot-2 {
+      width: 8px; height: 8px;
+      top: 60%; left: 25%;
+      background: var(--green-light);
+      box-shadow: 0 0 10px rgba(27,196,125,0.8);
+      animation: dot-float2 5.5s ease-in-out infinite;
+    }
+    .orb-dot-3 {
+      width: 6px; height: 6px;
+      top: 75%; left: 68%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(27,196,125,0.7);
+      animation: dot-float3 6s ease-in-out infinite;
+    }
+
+    @keyframes dot-float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes dot-float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(6px,-5px); } }
+    @keyframes dot-float3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+
+    /* ─── PLATFORM STRIP ─── */
+    .platform-strip {
+      width: 100%;
+      background: rgba(22,32,50,0.7);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.125rem 2rem;
+      position: relative; z-index: 1;
+    }
+    .platform-strip-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center;
+      gap: 2.5rem; flex-wrap: wrap;
+    }
+    .platform-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); white-space: nowrap; flex-shrink: 0;
+    }
+    .platform-pills { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8125rem; color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+    .pill::before {
+      content: ''; display: block;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+    }
+
+    /* ─── CUSTOMERS ─── */
+    .logos-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3.5rem; flex-wrap: wrap; margin: 2.5rem 0;
+    }
+    .logo-badge {
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 700; font-size: 1.0625rem;
+      letter-spacing: -0.01em;
+      color: rgba(248,250,252,0.3);
+      transition: color 0.2s;
+    }
+    .logo-badge:hover { color: rgba(248,250,252,0.65); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .testi-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.625rem;
+      transition: border-color 0.2s;
+    }
+    .testi-card:hover { border-color: var(--border-green); }
+    .stars { color: var(--green); font-size: 0.875rem; margin-bottom: 0.875rem; letter-spacing: 2px; }
+    .testi-text { font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.25rem; color: var(--text); }
+    .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Urbanist', sans-serif;
+      font-size: 0.8125rem; font-weight: 700; color: #0F172A;
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-family: 'Urbanist', sans-serif;
+      font-size: 0.875rem; font-weight: 600; color: var(--text-bright);
+    }
+    .author-role { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* ─── FEATURE 2-COL ─── */
+    .feat-2col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+
+    .feat-list {
+      list-style: none; display: flex;
+      flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;
+    }
+    .feat-list li {
+      display: flex; align-items: flex-start;
+      gap: 0.75rem; font-size: 0.9375rem; color: var(--text);
+    }
+    .check {
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(27,196,125,0.12); border: 1px solid var(--border-green);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green); font-size: 0.6875rem; margin-top: 1px;
+    }
+
+    /* ─── WEBSITE MOCKUP ─── */
+    .site-mock {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; position: relative;
+    }
+    .site-mock-bar {
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+      padding: 0.625rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .dot-r { width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; }
+    .dot-y { width: 9px; height: 9px; border-radius: 50%; background: #febc2e; }
+    .dot-g { width: 9px; height: 9px; border-radius: 50%; background: #28c840; }
+    .url-bar {
+      flex: 1; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 4px; padding: 0.25rem 0.625rem;
+      font-family: 'Poppins', sans-serif; font-size: 0.625rem;
+      color: var(--text-dim); letter-spacing: 0.02em;
+    }
+
+    /* Website wireframe inside mockup */
+    .mock-site-nav {
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .mock-logo-pill {
+      width: 40px; height: 8px; border-radius: 4px;
+      background: var(--green); opacity: 0.7;
+    }
+    .mock-nav-dots { display: flex; gap: 5px; }
+    .mock-nav-dot { width: 18px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.12); }
+
+    .mock-hero {
+      background: linear-gradient(135deg, rgba(27,196,125,0.08), rgba(15,23,42,0) 70%);
+      padding: 1.25rem 1rem 1rem;
+    }
+    .mock-h1 { width: 70%; height: 10px; border-radius: 5px; background: rgba(248,250,252,0.7); margin-bottom: 5px; }
+    .mock-h1-2 { width: 55%; height: 10px; border-radius: 5px; background: rgba(248,250,252,0.5); margin-bottom: 10px; }
+    .mock-sub { width: 80%; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.15); margin-bottom: 4px; }
+    .mock-sub-2 { width: 65%; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1); margin-bottom: 14px; }
+    .mock-cta {
+      display: inline-block; padding: 5px 12px;
+      background: var(--green); border-radius: 5px;
+      font-family: 'Poppins', sans-serif; font-size: 0.5625rem;
+      color: #0F172A; font-weight: 600; letter-spacing: 0.03em;
+    }
+
+    .mock-services {
+      padding: 1rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+      background: var(--bg-2);
+    }
+    .mock-service-card {
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 6px; padding: 8px;
+    }
+    .mock-card-icon {
+      width: 16px; height: 16px; border-radius: 4px;
+      background: rgba(27,196,125,0.2); margin-bottom: 5px;
+    }
+    .mock-card-line { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.15); margin-bottom: 3px; }
+    .mock-card-line-sm { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.08); width: 70%; }
+
+    .mock-stats {
+      padding: 0.75rem 1rem;
+      display: flex; gap: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .mock-stat { flex: 1; text-align: center; }
+    .mock-stat-num { font-family: 'Urbanist', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--green); }
+    .mock-stat-label { font-size: 0.4375rem; color: var(--text-dim); font-family: 'Poppins', sans-serif; }
+
+    /* ─── DATA FEATURES (services breakdown) ─── */
+    .data-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 1rem; margin-top: 3rem;
+    }
+    .data-card {
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.375rem; transition: border-color 0.2s;
+    }
+    .data-card:hover { border-color: var(--border-green); }
+    .data-num {
+      font-family: 'Poppins', sans-serif; font-size: 0.625rem; font-weight: 500;
+      letter-spacing: 0.1em; color: var(--green); text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .data-title {
+      font-family: 'Urbanist', sans-serif; font-size: 0.9375rem; font-weight: 600;
+      color: var(--text-bright); margin-bottom: 0.375rem;
+    }
+    .data-desc { font-size: 0.8125rem; color: var(--text); line-height: 1.65; }
+
+    /* ─── INDUSTRIES GRID ─── */
+    .int-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-bottom: 3rem;
+    }
+    .int-grid {
+      display: grid; grid-template-columns: repeat(6,1fr); gap: 0.875rem;
+    }
+    .int-item {
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 0.75rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      cursor: pointer; transition: border-color 0.2s, transform 0.2s;
+    }
+    .int-item:hover { border-color: var(--border-green); transform: translateY(-2px); }
+    .int-icon { font-size: 1.5rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .int-name {
+      font-size: 0.5875rem; color: var(--text); text-align: center;
+      font-family: 'Poppins', sans-serif; font-weight: 500; letter-spacing: 0.02em;
+    }
+    .int-more { border-style: dashed; background: rgba(27,196,125,0.04); }
+    .int-more .int-name { color: var(--green); }
+    .int-more .int-count {
+      font-size: 1.0625rem; font-weight: 700; color: var(--green);
+      font-family: 'Urbanist', sans-serif;
+    }
+
+    /* ─── DIFFERENTIATORS ─── */
+    .diff-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.25rem; margin-top: 3rem;
+    }
+    .diff-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.875rem 1.625rem; transition: border-color 0.2s;
+    }
+    .diff-card:hover { border-color: var(--border-green); }
+    .diff-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(27,196,125,0.1); border: 1px solid var(--border-green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1.25rem;
+    }
+    .diff-title {
+      font-family: 'Urbanist', sans-serif; font-size: 1rem; font-weight: 600;
+      color: var(--text-bright); margin-bottom: 0.5rem;
+    }
+    .diff-text { font-size: 0.875rem; color: var(--text); line-height: 1.7; }
+
+    /* ─── RESOURCES ─── */
+    .res-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 2.5rem;
+    }
+    .res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+    .res-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .res-card:hover { border-color: var(--border-green); }
+    .res-img {
+      aspect-ratio: 16/9; background: var(--bg-3);
+      position: relative; display: flex; align-items: center;
+      justify-content: center; font-size: 3.5rem;
+      color: rgba(255,255,255,0.07);
+    }
+    .res-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(27,196,125,0.1), rgba(15,23,42,0.05));
+    }
+    .res-tag-badge {
+      position: absolute; top: 0.875rem; left: 0.875rem;
+      background: rgba(27,196,125,0.18); border: 1px solid var(--border-green);
+      border-radius: 4px; padding: 0.2rem 0.5rem;
+      font-family: 'Poppins', sans-serif; font-size: 0.5625rem; font-weight: 500;
+      color: var(--green-light); letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .res-body { padding: 1.375rem; }
+    .res-title {
+      font-family: 'Urbanist', sans-serif; font-size: 0.9375rem; font-weight: 600;
+      color: var(--text-bright); margin-bottom: 0.5rem; line-height: 1.45;
+    }
+    .res-desc { font-size: 0.8125rem; color: var(--text); line-height: 1.65; }
+
+    /* ─── FAQ ─── */
+    .faq-wrap { max-width: 760px; margin: 3rem auto 0; }
+    .faq-item { border-top: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      padding: 1.25rem 0; display: flex;
+      align-items: center; justify-content: space-between; gap: 1rem;
+      font-family: 'Urbanist', sans-serif; font-size: 1rem; font-weight: 600;
+      color: var(--text-bright); text-align: left; cursor: pointer; transition: color 0.18s;
+    }
+    .faq-q:hover { color: var(--green-light); }
+    .faq-toggle {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--bg-3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.875rem; color: var(--text-dim); flex-shrink: 0;
+      transition: transform 0.25s, background 0.18s, border-color 0.18s, color 0.18s;
+    }
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      background: rgba(27,196,125,0.12); border-color: var(--border-green); color: var(--green);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding-bottom 0.3s;
+      font-size: 0.9375rem; color: var(--text); line-height: 1.75; padding-right: 2.5rem;
+    }
+    .faq-item.open .faq-a { max-height: 320px; padding-bottom: 1.25rem; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      padding: 8rem 2rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,196,125,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(27,196,125,0.035) 1px, transparent 1px);
+      background-size: 48px 48px; pointer-events: none;
+    }
+    .final-cta > * { position: relative; z-index: 1; }
+    .final-cta h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800;
+      letter-spacing: -0.035em; margin-bottom: 1rem;
+    }
+    .final-cta h2 em { font-style: normal; color: var(--green); }
+    .final-cta p { max-width: 460px; margin: 0 auto 2.5rem; font-size: 1.0625rem; line-height: 1.75; }
+    .cta-btns { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-inner { max-width: 1160px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-logo img { height: 32px; width: auto; margin-bottom: 1rem; }
+    .footer-brand-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.7; max-width: 260px; margin-bottom: 1.25rem; }
+    .footer-socials { display: flex; gap: 0.5rem; }
+    .social-btn {
+      padding: 0.375rem 0.75rem; border-radius: 6px; font-size: 0.75rem;
+      background: var(--bg-3); border: 1px solid var(--border);
+      color: var(--text-dim); transition: color 0.18s, border-color 0.18s; cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    .social-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .footer-col h5 {
+      font-family: 'Urbanist', sans-serif; font-size: 0.9375rem; font-weight: 600;
+      color: var(--text-bright); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: var(--text-dim); transition: color 0.18s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8125rem; color: var(--text-dim); flex-wrap: wrap; gap: 0.75rem;
+    }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { color: var(--text-dim); transition: color 0.18s; }
+    .footer-legal a:hover { color: var(--text); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .sr {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .sr.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .orb-scene { display: none; }
+      .feat-2col { grid-template-columns: 1fr; gap: 2.5rem; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .diff-grid { grid-template-columns: 1fr 1fr; }
+      .res-grid { grid-template-columns: 1fr; }
+      .int-grid { grid-template-columns: repeat(4,1fr); }
+      .int-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .diff-grid { grid-template-columns: 1fr; }
+      .data-grid { grid-template-columns: 1fr; }
+      .int-grid { grid-template-columns: repeat(3,1fr); }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="brand_assets/BA LABS - 250x150 (transparent).png" alt="BA Labs">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Process</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="btn btn-ghost">Log in</a>
+    <a href="#" class="btn btn-primary">Get a Free Quote</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span class="hero-badge-text">Web Design for Local Contractors</span>
+      </div>
+      <h1>Websites that<br>win you <em>more clients</em></h1>
+      <p class="hero-sub">BA Labs builds fast, professional websites for local contractors. Get found online, stand out from the competition, and turn visitors into paying customers.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary btn-lg">Get a Free Quote &rarr;</a>
+        <a href="#" class="btn btn-ghost btn-lg">See our work</a>
+      </div>
+    </div>
+
+    <div class="orb-scene">
+      <div class="orb-rings">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+        <div class="orb-sphere"></div>
+        <div class="orb-dot orb-dot-1"></div>
+        <div class="orb-dot orb-dot-2"></div>
+        <div class="orb-dot orb-dot-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="platform-strip">
+    <div class="platform-strip-inner">
+      <span class="platform-label">Your complete web presence solution</span>
+      <div class="platform-pills">
+        <span class="pill">Custom design</span>
+        <span class="pill">Mobile-friendly</span>
+        <span class="pill">SEO optimized</span>
+        <span class="pill">Fast delivery</span>
+        <span class="pill">Ongoing support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ CUSTOMERS ══════════════════════════ -->
+<section class="section bg-alt">
+  <div class="container">
+    <div style="text-align:center;" class="sr">
+      <span class="section-tag">Social proof</span>
+      <h2 class="section-title">Don't just take our word for it,<br>our <em>clients</em> say it best</h2>
+    </div>
+
+    <div class="logos-row sr">
+      <span class="logo-badge">Hansen Rør</span>
+      <span class="logo-badge">Nordvik El</span>
+      <span class="logo-badge">Oslo Fence Co</span>
+      <span class="logo-badge">Bergen Bygg</span>
+      <span class="logo-badge">TakTekk AS</span>
+      <span class="logo-badge">Grønt Anlegg</span>
+      <span class="logo-badge">Stavanger VVS</span>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card sr">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"BA Labs built us a website in under two weeks. Since launch our phone hasn't stopped ringing. More leads in one month than we got all of last year. Dead simple to work with."</p>
+        <div class="testi-author">
+          <div class="avatar">TH</div>
+          <div>
+            <div class="author-name">Tor Hansen</div>
+            <div class="author-role">Owner, Hansen Rør AS — Oslo</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card sr" style="transition-delay:.12s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"We tried two other agencies before BA Labs. Nobody else understood what we actually needed. Now we rank on Google locally and customers find us every day without us doing anything."</p>
+        <div class="testi-author">
+          <div class="avatar">MB</div>
+          <div>
+            <div class="author-name">Marte Berg</div>
+            <div class="author-role">Director, Nordvik El — Bergen</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card sr" style="transition-delay:.24s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Professional, fast, and they speak plain language — no tech jargon. Our new site looks amazing on phones, and we get quote requests directly through the contact form every week."</p>
+        <div class="testi-author">
+          <div class="avatar">KL</div>
+          <div>
+            <div class="author-name">Kristian Larsen</div>
+            <div class="author-role">CEO, Oslo Fence Co — Oslo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FEATURE 1 ══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="feat-2col">
+      <div class="sr">
+        <span class="section-tag">What we build</span>
+        <h2 class="section-title">The complete website<br>built for <em>local trades</em></h2>
+        <p class="section-sub">Every BA Labs website is built to do one thing well: get your business more customers. Fast, beautiful, and optimised for the customers searching in your area right now.</p>
+        <ul class="feat-list">
+          <li><span class="check">✓</span> Mobile-first design that looks great on every device</li>
+          <li><span class="check">✓</span> Local SEO so customers find you on Google Maps</li>
+          <li><span class="check">✓</span> Contact forms and click-to-call for instant enquiries</li>
+          <li><span class="check">✓</span> Fast load times — under 2 seconds, every time</li>
+          <li><span class="check">✓</span> Easy to update — no technical skills required</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="margin-top:2rem;">View our portfolio &rarr;</a>
+      </div>
+
+      <div class="sr" style="transition-delay:.15s">
+        <div class="site-mock">
+          <div class="site-mock-bar">
+            <div class="dot-r"></div>
+            <div class="dot-y"></div>
+            <div class="dot-g"></div>
+            <div class="url-bar">hansenvvs.no</div>
+          </div>
+          <!-- Website wireframe -->
+          <div class="mock-site-nav">
+            <div class="mock-logo-pill"></div>
+            <div class="mock-nav-dots">
+              <div class="mock-nav-dot"></div>
+              <div class="mock-nav-dot"></div>
+              <div class="mock-nav-dot"></div>
+              <div class="mock-nav-dot" style="width:32px; background:rgba(27,196,125,0.5); border-radius:3px;"></div>
+            </div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-h1"></div>
+            <div class="mock-h1-2"></div>
+            <div class="mock-sub"></div>
+            <div class="mock-sub-2"></div>
+            <span class="mock-cta">Få et gratis tilbud →</span>
+          </div>
+          <div class="mock-services">
+            <div class="mock-service-card">
+              <div class="mock-card-icon"></div>
+              <div class="mock-card-line"></div>
+              <div class="mock-card-line-sm"></div>
+            </div>
+            <div class="mock-service-card">
+              <div class="mock-card-icon"></div>
+              <div class="mock-card-line"></div>
+              <div class="mock-card-line-sm"></div>
+            </div>
+            <div class="mock-service-card">
+              <div class="mock-card-icon"></div>
+              <div class="mock-card-line"></div>
+              <div class="mock-card-line-sm"></div>
+            </div>
+          </div>
+          <div class="mock-stats">
+            <div class="mock-stat">
+              <div class="mock-stat-num">+340%</div>
+              <div class="mock-stat-label">More visits</div>
+            </div>
+            <div class="mock-stat">
+              <div class="mock-stat-num">2 wk</div>
+              <div class="mock-stat-label">Time to live</div>
+            </div>
+            <div class="mock-stat">
+              <div class="mock-stat-num">4.9★</div>
+              <div class="mock-stat-label">Client score</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ SERVICES BREAKDOWN ══════════════════════════ -->
+<section class="section bg-alt">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto;" class="sr">
+      <span class="section-tag">Our services</span>
+      <h2 class="section-title">The website your business<br>has been <em>waiting for</em></h2>
+      <p class="section-sub" style="margin:0 auto;">Stop losing customers to competitors with better websites. We handle everything from design to launch — so you can focus on the work you do best.</p>
+    </div>
+    <div class="data-grid sr">
+      <div class="data-card">
+        <div class="data-num">01 / Design</div>
+        <div class="data-title">Custom website design</div>
+        <div class="data-desc">A unique, professional design built specifically for your trade and your local market. No templates, no generic layouts — just a site that looks like yours.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">02 / SEO</div>
+        <div class="data-title">Local search optimisation</div>
+        <div class="data-desc">We optimise every page so Google knows exactly where you work and what you do. Show up when local customers search for your trade in your area.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">03 / Leads</div>
+        <div class="data-title">Built to convert visitors</div>
+        <div class="data-desc">Clear calls-to-action, contact forms, and click-to-call buttons on every page. Every element is designed to turn a browser into an enquiry.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">04 / Support</div>
+        <div class="data-title">Ongoing care and updates</div>
+        <div class="data-desc">We don't disappear after launch. Updates, changes, and technical support — we're here whenever you need us. No IT skills required on your end.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ INDUSTRIES ══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="int-header sr">
+      <div>
+        <span class="section-tag">Industries</span>
+        <h2 class="section-title">Built for <em>every trade</em><br>in your area</h2>
+      </div>
+      <div>
+        <p class="section-sub">Whether you're a one-person plumbing operation or a growing fencing company, BA Labs builds websites that fit your trade — and your budget.</p>
+        <a href="#" class="btn btn-primary" style="margin-top:1.5rem; display:inline-flex;">Talk to us about your trade &rarr;</a>
+      </div>
+    </div>
+    <div class="int-grid sr">
+      <div class="int-item"><div class="int-icon">🔧</div><span class="int-name">Plumbing</span></div>
+      <div class="int-item"><div class="int-icon">⚡</div><span class="int-name">Electrical</span></div>
+      <div class="int-item"><div class="int-icon">🏗️</div><span class="int-name">Fencing</span></div>
+      <div class="int-item"><div class="int-icon">🏠</div><span class="int-name">Roofing</span></div>
+      <div class="int-item"><div class="int-icon">🌱</div><span class="int-name">Landscaping</span></div>
+      <div class="int-item"><div class="int-icon">❄️</div><span class="int-name">HVAC</span></div>
+      <div class="int-item"><div class="int-icon">🪚</div><span class="int-name">Carpentry</span></div>
+      <div class="int-item"><div class="int-icon">🎨</div><span class="int-name">Painting</span></div>
+      <div class="int-item"><div class="int-icon">🧹</div><span class="int-name">Cleaning</span></div>
+      <div class="int-item"><div class="int-icon">🏛️</div><span class="int-name">Tiling</span></div>
+      <div class="int-item"><div class="int-icon">🪵</div><span class="int-name">Flooring</span></div>
+      <div class="int-item int-more">
+        <div class="int-count">+More</div>
+        <span class="int-name">Your trade</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ DIFFERENTIATORS ══════════════════════════ -->
+<section class="section bg-alt">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto 1rem;" class="sr">
+      <span class="section-tag">Why BA Labs</span>
+      <h2 class="section-title">What sets <em>BA Labs</em> apart</h2>
+      <p class="section-sub" style="margin:0 auto;">We built the web agency we always wished contractors had access to — honest, fast, and focused on results that actually matter to your business.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card sr">
+        <div class="diff-icon">⚡</div>
+        <div class="diff-title">Live in 2 weeks</div>
+        <div class="diff-text">No months of back-and-forth. We move fast, keep you in the loop at every step, and get your site live quickly so you start getting leads sooner.</div>
+      </div>
+      <div class="diff-card sr" style="transition-delay:.1s">
+        <div class="diff-icon">📍</div>
+        <div class="diff-title">Local SEO expertise</div>
+        <div class="diff-text">We know how local search works in Norway. Your site will be set up from day one to rank for the searches your future customers are making right now.</div>
+      </div>
+      <div class="diff-card sr" style="transition-delay:.2s">
+        <div class="diff-icon">🤝</div>
+        <div class="diff-title">No lock-in contracts</div>
+        <div class="diff-text">We earn your loyalty through results, not contracts. Stay with us because we deliver — not because you're trapped. Cancel or change anytime.</div>
+      </div>
+      <div class="diff-card sr" style="transition-delay:.1s">
+        <div class="diff-icon">💰</div>
+        <div class="diff-title">Pricing that makes sense</div>
+        <div class="diff-text">Affordable rates built for small and medium businesses. No hidden fees, no confusing packages. You know exactly what you're paying for before we start.</div>
+      </div>
+      <div class="diff-card sr" style="transition-delay:.2s">
+        <div class="diff-icon">📱</div>
+        <div class="diff-title">Mobile-first, always</div>
+        <div class="diff-text">Over 70% of your customers search from their phones. Every site we build looks perfect on mobile — fast, clear, and easy to use on any screen size.</div>
+      </div>
+      <div class="diff-card sr" style="transition-delay:.3s">
+        <div class="diff-icon">💬</div>
+        <div class="diff-title">Real people, real support</div>
+        <div class="diff-text">You'll always speak to a real person at BA Labs — not a chatbot. We're here when you need us, with plain language and no technical jargon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ RESOURCES ══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="res-header sr">
+      <div>
+        <span class="section-tag">Resources</span>
+        <h2 class="section-title">Helpful guides for<br>growing your <em>business online</em></h2>
+      </div>
+      <a href="#" class="btn btn-ghost">Read all articles &rarr;</a>
+    </div>
+    <div class="res-grid">
+      <div class="res-card sr">
+        <div class="res-img">
+          📋
+          <div class="res-img-overlay"></div>
+          <span class="res-tag-badge">Guide</span>
+        </div>
+        <div class="res-body">
+          <div class="res-title">5 things every contractor website must have in 2025</div>
+          <div class="res-desc">A quick checklist of the most important elements that separate websites that generate leads from those that don't — straight to the point.</div>
+        </div>
+      </div>
+      <div class="res-card sr" style="transition-delay:.12s">
+        <div class="res-img">
+          📈
+          <div class="res-img-overlay" style="background:linear-gradient(135deg,rgba(27,196,125,0.12),rgba(15,23,42,0.05));"></div>
+          <span class="res-tag-badge">Case Study</span>
+        </div>
+        <div class="res-body">
+          <div class="res-title">How Hansen Rør doubled their leads in 60 days</div>
+          <div class="res-desc">A small Oslo plumbing company went from no online presence to their busiest season ever — here's exactly what we did and how long it took.</div>
+        </div>
+      </div>
+      <div class="res-card sr" style="transition-delay:.24s">
+        <div class="res-img">
+          🗺️
+          <div class="res-img-overlay" style="background:linear-gradient(135deg,rgba(27,196,125,0.1),rgba(15,23,42,0.08));"></div>
+          <span class="res-tag-badge">Tips</span>
+        </div>
+        <div class="res-body">
+          <div class="res-title">How to get your business on Google Maps (step by step)</div>
+          <div class="res-desc">Google Business Profile is free and one of the most powerful tools for local contractors. Here's how to set it up properly in under 30 minutes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FAQ ══════════════════════════ -->
+<section class="section bg-alt">
+  <div class="container">
+    <div style="text-align:center;" class="sr">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Have Questions?<br>Here's what we <em>hear often</em></h2>
+    </div>
+    <div class="faq-wrap sr">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does it take to build a website?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">Most projects are live within 2 weeks of our first call. We keep things moving with a clear process: discovery, design, review, and launch. You'll know exactly where we are at every step.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How much does a website cost?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">Our packages start at an affordable flat rate, with optional monthly support plans. We'll give you a clear quote upfront — no hidden fees or surprise invoices. Contact us and we'll talk through what fits your budget.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you handle SEO — will I rank on Google?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">Yes. Every site we build is optimised for local SEO from day one — proper page titles, descriptions, Google Maps integration, and fast loading speeds. We also help you set up and optimise your Google Business Profile.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I update the website myself after it's built?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">Absolutely. We set up every site so you can make basic edits yourself without any technical knowledge. And if you'd rather leave updates to us, our monthly support plan has you covered — just send us a message.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you work with all types of contractors?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">Yes — we've built sites for plumbers, electricians, fencing companies, roofers, landscapers, painters, cleaners, carpenters, and more. If you're a local contractor in Norway, we can help you grow online.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What happens after the site goes live?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">We don't just hand over a file and disappear. We monitor performance, offer support when you need it, and check in regularly. Our monthly plan includes unlimited small updates, hosting, and a dedicated point of contact.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FINAL CTA ══════════════════════════ -->
+<section class="final-cta">
+  <div class="sr">
+    <span class="section-tag" style="display:block; margin-bottom:1.5rem;">Let's get started</span>
+    <h2>Ready to grow<br>your <em>local business?</em></h2>
+    <p>A professional website is the best investment you can make for your trade. Get a free quote today — no pressure, no jargon, just straight talk about what we can do for you.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-primary btn-lg">Get a Free Quote &rarr;</a>
+      <a href="#" class="btn btn-ghost btn-lg">See our work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <img src="brand_assets/BA LABS - 250x150 (transparent).png" alt="BA Labs">
+        </div>
+        <p class="footer-brand-desc">Modern web solutions for local contractors. We help tradespeople get found online and win more customers.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">Facebook</a>
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Website Design</a></li>
+          <li><a href="#">Local SEO</a></li>
+          <li><a href="#">Lead Generation</a></li>
+          <li><a href="#">Ongoing Support</a></li>
+          <li><a href="#">Google Maps Setup</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Industries</h5>
+        <ul>
+          <li><a href="#">Plumbing</a></li>
+          <li><a href="#">Electrical</a></li>
+          <li><a href="#">Fencing</a></li>
+          <li><a href="#">Roofing</a></li>
+          <li><a href="#">Landscaping</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Process</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@balabs.no">hello@balabs.no</a></li>
+          <li><a href="https://balabs.no">balabs.no</a></li>
+          <li><a href="#">Norway</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BA Labs. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
